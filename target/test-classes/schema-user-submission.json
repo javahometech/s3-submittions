@@ -1,0 +1,124 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "User Submission",
+    "description": "Offering Activity User Submission",
+    "type": "object",
+    "properties": {
+        "type": {
+            "description": "manual, automatic",
+            "type": "string"
+        },
+        "source": {
+            "description": "external, internal",
+            "type": "string"
+        },
+        "sourceId": {
+            "description": "submitter's firm id",
+            "type": "string"
+        },
+        "sbmtrId": {
+            "description": "submitter's email id",
+            "type": "string"
+        },
+		"offering": {
+			"type": "object",
+			"properties": {
+				"action": {
+					"description": "create, modify, delete",
+					"type": "string"
+				},
+				"ofrngId": {
+					"description": "DTC Offering Id",
+					"type": "string"
+				},
+				"legalDs": {
+					"description": "Legal Description",
+					"type": "string"
+				}
+			},
+			"required": ["action"]
+		},
+		"issues": {
+			"description": "Set of Issues",
+			"type": "array",
+			"items": {
+				"description": "Issue",
+				"type": "object",
+				"properties": {
+					"action": {
+						"description": "create, modify, delete",
+						"type": "string"
+					},
+					"issueId": {
+						"description": "DTC Offering Issue Id",
+						"type": "string"
+					},
+					"baseQsip": {
+						"description": "Base CUSIP",
+						"type": "string"
+					},
+					"xpctdClsgDt": {
+						"description": "Expected Closing Date",
+						"type": "string"
+					},
+					"securities": {
+						"description": "Set of Securities",
+						"type": "array",
+						"items": {
+							"description": "Security",
+							"type": "object",
+							"properties": {
+								"action": {
+									"description": "create, modify, delete",
+									"type": "string"
+								},
+								"secId": {
+									"description": "DTC Offering Security Id",
+									"type": "string"
+								},
+								"maturityDt": {
+									"description": "Maturity Date",
+									"type": "string"
+								},
+								"datedDt": {
+									"description": "Dated Date",
+									"type": "string"
+								},
+								"intRt": {
+									"description": "Interest Rate",
+									"type": "number"
+								},
+								"secUndrt": {
+									"description": "Set of Security Underwriters",
+									"type": "array",
+									"items": {
+										"description": "Security Underwriter",
+										"type": "object",
+										"properties": {
+											"action": {
+												"description": "create, modify, delete",
+												"type": "string"
+											},
+											"undrtId": {
+												"description": "Underwriter Id",
+												"type": "integer"
+											},
+											"takedown": {
+												"description": "Takedown Amount",
+												"type": "integer"
+											}
+										},
+										"required": ["action"]
+									}
+								}
+							},
+							"required": ["action"]
+						}
+					}
+				},
+				"required": ["action"]
+			}
+		}
+    },
+    "required": ["type","source","sourceId","sbmtrId"]
+}
