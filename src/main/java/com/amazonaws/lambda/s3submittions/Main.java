@@ -22,8 +22,14 @@ public class Main {
 
 	public static void main(String[] args) throws JsonParseException, JsonMappingException, IOException {
 		validateJSONFile();
-		convertJSONToPojo(Main.class.getResourceAsStream("/create-multiple.json"));
-
+		String offeringId = UUID.randomUUID().toString();
+		Securities convertJSONToPojo = convertJSONToPojo(Main.class.getResourceAsStream("/create-multiple.json"));
+		Connection con = RDSUtil.getRDSConnection();
+		try {
+			addOfferingLevel(con, convertJSONToPojo, offeringId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private static void validateJSONFile() {
@@ -40,9 +46,9 @@ public class Main {
 		return mapper.readValue(is, Securities.class);
 	}
 
-	private static void addOfferingLevel(Connection con, Securities securitues) throws SQLException {
+	private static void addOfferingLevel(Connection con, Securities securitues, String offeringId) throws SQLException {
 		PreparedStatement pstmt = con.prepareStatement(offeringLevel);
-		pstmt.setString(1, UUID.randomUUID().toString());
+		pstmt.setString(1, offeringId);
 		pstmt.executeUpdate();
 	}
 
