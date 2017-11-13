@@ -18,7 +18,10 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Main {
-	static String offeringLevel = "INSERT INTO OFFERING_LEVEL(OFFER_ID) VALUES(?)";
+	static String offeringLevel = "INSERT INTO OFFERING_LEVEL(OFFERING_ID, ACTION, LEGALDS) VALUES(?, ?, ?)";
+	static String issuesLevel = "INSERT INTO ISSUES_LEVEL(OFFERING_ID, ACTION, BASE_QSIP, XPCTD_CLSG_DT) VALUES(?, ?, ?, ?)";
+	static String issuesSecuritiesLevel = "INSERT INTO ISSUES_SECURITIES_LEVEL(OFFERING_ID, ACTION, SECID, MATURITYDT, DATEDDT, INTRT) VALUES(?, ?, ?, ?, ?, ?)";
+	static String issuesSecUndrtLevel = "INSERT INTO ISSUES_SECUNDRT_LEVEL(OFFERING_ID, ACTION, UNDRTID, TAKEDOWN) VALUES(?, ?, ?, ?)";
 
 	public static void main(String[] args) throws JsonParseException, JsonMappingException, IOException {
 		validateJSONFile();
@@ -27,6 +30,10 @@ public class Main {
 		Connection con = RDSUtil.getRDSConnection();
 		try {
 			addOfferingLevel(con, convertJSONToPojo, offeringId);
+			addIssuesLevel(con, convertJSONToPojo, offeringId);
+			addIssuesSecuritiesLevel(con, convertJSONToPojo, offeringId);
+			addIssuesSecUndrtLevel(con, convertJSONToPojo, offeringId);
+			System.out.println("SUCCESS");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -49,6 +56,37 @@ public class Main {
 	private static void addOfferingLevel(Connection con, Securities securitues, String offeringId) throws SQLException {
 		PreparedStatement pstmt = con.prepareStatement(offeringLevel);
 		pstmt.setString(1, offeringId);
+		pstmt.setString(2, securitues.getOffering().getAction());
+		pstmt.setString(3, securitues.getOffering().getLegalDs());
+		pstmt.executeUpdate();
+	}
+	
+	private static void addIssuesLevel(Connection con, Securities securitues, String offeringId) throws SQLException {
+		PreparedStatement pstmt = con.prepareStatement(issuesLevel);
+		pstmt.setString(1, offeringId);
+		pstmt.setString(2, securitues.getIssues().get(0).getAction());
+		pstmt.setString(3, securitues.getIssues().get(0).getBaseQsip());
+		pstmt.setString(4, securitues.getIssues().get(0).getXpctdClsgDt());
+		pstmt.executeUpdate();
+	}
+	
+	private static void addIssuesSecuritiesLevel(Connection con, Securities securitues, String offeringId) throws SQLException {
+		PreparedStatement pstmt = con.prepareStatement(issuesSecuritiesLevel);
+		pstmt.setString(1, offeringId);
+		pstmt.setString(2, securitues.getIssues().get(0).getSecurities().get(0).getAction());
+		pstmt.setString(3, securitues.getIssues().get(0).getSecurities().get(0).getSecId());
+		pstmt.setString(4, securitues.getIssues().get(0).getSecurities().get(0).getMaturityDt());
+		pstmt.setString(5, securitues.getIssues().get(0).getSecurities().get(0).getDatedDt());
+		pstmt.setDouble(6, securitues.getIssues().get(0).getSecurities().get(0).getIntRt());
+		pstmt.executeUpdate();
+	}
+	
+	private static void addIssuesSecUndrtLevel(Connection con, Securities securitues, String offeringId) throws SQLException {
+		PreparedStatement pstmt = con.prepareStatement(issuesSecUndrtLevel);
+		pstmt.setString(1, offeringId);
+		pstmt.setString(2, securitues.getIssues().get(0).getSecurities().get(0).getSecUndrt().get(0).getAction());
+		pstmt.setDouble(3, securitues.getIssues().get(0).getSecurities().get(0).getSecUndrt().get(0).getUndrtId());
+		pstmt.setDouble(4, securitues.getIssues().get(0).getSecurities().get(0).getSecUndrt().get(0).getTakedown());
 		pstmt.executeUpdate();
 	}
 
