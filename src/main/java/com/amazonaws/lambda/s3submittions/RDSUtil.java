@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 public class RDSUtil {
 	private static String DRIVER_CLASS = "com.mysql.jdbc.Driver";
-	private static String USER_NAME = "";
-	private static String PASSWORD = "";
-	private static String RDS_ENDPOINT = "";
+	private static String USER_NAME = "valtech";
+	private static String PASSWORD = "valtech123";
+	private static String RDS_ENDPOINT = "jdbc:mysql://valtech-training.cqx1rqbejdw5.us-west-2.rds.amazonaws.com:3306/valtechdev";
 	static {
 		try {
 			Class.forName(DRIVER_CLASS);
