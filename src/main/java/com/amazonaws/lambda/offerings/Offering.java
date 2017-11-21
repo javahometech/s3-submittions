@@ -1,5 +1,5 @@
 
-package com.amazonaws.lambda.s3submittions.pojo;
+package com.amazonaws.lambda.offerings;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,18 +11,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-
-/**
- * Security Underwriter
- * 
- */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
     "action",
-    "undrtId",
-    "takedown"
+    "ofrngId",
+    "legalDs"
 })
-public class SecUndrt {
+public class Offering {
 
     /**
      * create, modify, delete
@@ -33,19 +28,19 @@ public class SecUndrt {
     @JsonPropertyDescription("create, modify, delete")
     private String action;
     /**
-     * Underwriter Id
+     * DTC Offering Id
      * 
      */
-    @JsonProperty("undrtId")
-    @JsonPropertyDescription("Underwriter Id")
-    private Integer undrtId;
+    @JsonProperty("ofrngId")
+    @JsonPropertyDescription("DTC Offering Id")
+    private String ofrngId;
     /**
-     * Takedown Amount
+     * Legal Description
      * 
      */
-    @JsonProperty("takedown")
-    @JsonPropertyDescription("Takedown Amount")
-    private Integer takedown;
+    @JsonProperty("legalDs")
+    @JsonPropertyDescription("Legal Description")
+    private String legalDs;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -70,39 +65,39 @@ public class SecUndrt {
     }
 
     /**
-     * Underwriter Id
+     * DTC Offering Id
      * 
      */
-    @JsonProperty("undrtId")
-    public Integer getUndrtId() {
-        return undrtId;
+    @JsonProperty("ofrngId")
+    public String getOfrngId() {
+        return ofrngId;
     }
 
     /**
-     * Underwriter Id
+     * DTC Offering Id
      * 
      */
-    @JsonProperty("undrtId")
-    public void setUndrtId(Integer undrtId) {
-        this.undrtId = undrtId;
+    @JsonProperty("ofrngId")
+    public void setOfrngId(String ofrngId) {
+        this.ofrngId = ofrngId;
     }
 
     /**
-     * Takedown Amount
+     * Legal Description
      * 
      */
-    @JsonProperty("takedown")
-    public Integer getTakedown() {
-        return takedown;
+    @JsonProperty("legalDs")
+    public String getLegalDs() {
+        return legalDs;
     }
 
     /**
-     * Takedown Amount
+     * Legal Description
      * 
      */
-    @JsonProperty("takedown")
-    public void setTakedown(Integer takedown) {
-        this.takedown = takedown;
+    @JsonProperty("legalDs")
+    public void setLegalDs(String legalDs) {
+        this.legalDs = legalDs;
     }
 
     @JsonAnyGetter

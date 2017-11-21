@@ -1,68 +1,56 @@
 {
-  "type": "automatic",
-  "source": "external",
-  "sourceId": "MICKEY",
-  "sbmtrId": "rruiz@dtcc.com",
-  "offering": {
-    "action": "create",
-    "legalDs": "Best Sangria CD"
-  },
-  "issues": [
-    {
-      "action": "create",
-      "baseQsip": "GORDON",
-      "xpctdClsgDt": "11/07/2017",
-      "securities": [
-        {
-          "action": "create",
-          "secId": "GORDON101",
-          "maturityDt": "11/21/2017",
-          "datedDt": "10/31/2017",
-          "intRt": 1.25,
-          "secUndrt": [
-            {
-              "action": "create",
-              "undrtId": 123,
-              "takedown": 500000
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "action": "create",
-      "baseQsip": "RAMSAY",
-      "xpctdClsgDt": "11/07/2017",
-      "securities": [
-        {
-          "action": "create",
-          "secId": "RAMSAY101",
-          "maturityDt": "11/21/2017",
-          "datedDt": "10/31/2017",
-          "intRt": 5.0,
-          "secUndrt": [
-            {
-              "action": "create",
-              "undrtId": 123,
-              "takedown": 750000
-            }
-          ]
-        },
-        {
-          "action": "create",
-          "secId": "RAMSAY102",
-          "maturityDt": "11/21/2017",
-          "datedDt": "10/31/2017",
-          "intRt": 7.5,
-          "secUndrt": [
-            {
-              "action": "create",
-              "undrtId": 123,
-              "takedown": 1250000
-            }
-          ]
-        }
-      ]
-    }
-  ]
+	"type": "automatic",
+	"source": "external",
+	"sourceId": "MICKEY",
+	"sbmtrId": "rruiz@dtcc.com",
+	"offering": {
+		"action": "create",
+		"legalDs": "Best Sangria CD"
+	},
+	"issues": [{
+		"action": "create",
+		"baseQsip": "GORDON",
+		"xpctdClsgDt": "11/07/2017",
+		"securities": [{
+			"action": "create",
+			"secId": "GORDON101",
+			"maturityDt": "11/21/2017",
+			"datedDt": "10/31/2017",
+			"intRt": 1.25,
+			"secUndrt": [{
+				"action": "create",
+				"undrtId": "MICKEY",
+				"takedown": 500000
+			}]
+		}]
+	},
+	{
+		"action": "create",
+		"baseQsip": "RAMSAY",
+		"xpctdClsgDt": "11/07/2017",
+		"securities": [{
+			"action": "create",
+			"secId": "RAMSAY101",
+			"maturityDt": "11/21/2017",
+			"datedDt": "10/31/2017",
+			"intRt": 5.0,
+			"secUndrt": [{
+				"action": "create",
+				"undrtId": "MICKEY",
+				"takedown": 750000
+			}]
+		},
+		{
+			"action": "create",
+			"secId": "RAMSAY102",
+			"maturityDt": "11/21/2017",
+			"datedDt": "10/31/2017",
+			"intRt": 7.5,
+			"secUndrt": [{
+				"action": "create",
+				"undrtId": "MICKEY",
+				"takedown": 1250000
+			}]
+		}]
+	}]
 }

@@ -12,7 +12,7 @@ import org.everit.json.schema.loader.SchemaLoader;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import com.amazonaws.lambda.s3submittions.pojo.Securities;
+import com.amazonaws.lambda.offerings.OfferingData;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,10 +23,11 @@ public class Main {
 	public static void main(String[] args) throws JsonParseException, JsonMappingException, IOException {
 		validateJSONFile();
 		String offeringId = UUID.randomUUID().toString();
-		Securities convertJSONToPojo = convertJSONToPojo(Main.class.getResourceAsStream("/create-multiple.json"));
+		OfferingData convertJSONToPojo = convertJSONToPojo(Main.class.getResourceAsStream("/create-multiple.json"));
 		Connection con = RDSUtil.getRDSConnection();
 		try {
 			addOfferingLevel(con, convertJSONToPojo, offeringId);
+			System.out.println("End");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -41,15 +42,15 @@ public class Main {
 		schema.validate(jsonSubject);
 	}
 
-	private static Securities convertJSONToPojo(InputStream is) throws IOException {
+	private static OfferingData convertJSONToPojo(InputStream is) throws IOException {
 		ObjectMapper mapper = new ObjectMapper();
-		return mapper.readValue(is, Securities.class);
+		return mapper.readValue(is, OfferingData.class);
 	}
 
-	private static void addOfferingLevel(Connection con, Securities securitues, String offeringId) throws SQLException {
+	private static void addOfferingLevel(Connection con, OfferingData data, String offeringId) throws SQLException {
 		PreparedStatement pstmt = con.prepareStatement(offeringLevel);
 		pstmt.setString(1, offeringId);
-		pstmt.executeUpdate();
+//		pstmt.executeUpdate();
 	}
 
 }

@@ -1,5 +1,5 @@
 
-package com.amazonaws.lambda.s3submittions.pojo;
+package com.amazonaws.lambda.offerings;
 
 import java.util.HashMap;
 import java.util.List;
@@ -28,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "offering",
     "issues"
 })
-public class Securities {
+public class OfferingData {
 
     /**
      * manual, automatic
