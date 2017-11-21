@@ -25,6 +25,7 @@ public class Main {
 
 	public static void main(String[] args) throws JsonParseException, JsonMappingException, IOException {
 		validateJSONFile();
+		System.out.println("Success");
 //		String offeringId = UUID.randomUUID().toString();
 //		OfferingData convertJSONToPojo = convertJSONToPojo(Main.class.getResourceAsStream("/create-multiple.json"));
 //		Connection con = RDSUtil.getRDSConnection();
